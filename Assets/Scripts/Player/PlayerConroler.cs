@@ -63,14 +63,11 @@ public class PlayerConroler : MonoBehaviour
         input.Gameplay.Jump.performed -= MoveJump;
         input.Gameplay.Inventory.performed -= OpenInventory;
     }
-    private void Update()
-    {
-    }
     private void FixedUpdate()
     {
         forward = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         CheckGround();
-        PlayerMove();
+       PlayerMove();
         Gravity();
     }    
     private void PlayerMove()
