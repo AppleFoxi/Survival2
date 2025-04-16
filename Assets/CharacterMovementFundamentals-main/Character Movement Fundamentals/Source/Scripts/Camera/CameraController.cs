@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace CMF
 {
@@ -96,7 +95,9 @@ namespace CMF
 		}
 
 		//Rotate camera; 
-		protected void RotateCamera(float _newHorizontalInput, float _newVerticalInput)
+		[SerializeField] float angle;
+
+        protected void RotateCamera(float _newHorizontalInput, float _newVerticalInput)
 		{
 			if(smoothCameraRotation)
 			{
@@ -110,9 +111,10 @@ namespace CMF
 				oldHorizontalInput = _newHorizontalInput;
 				oldVerticalInput = _newVerticalInput;
 			}
-
-			//Add input to camera angles;
-			currentXAngle += oldVerticalInput * cameraSpeed * Time.deltaTime;
+            if (isTest)
+                _playerRotation.rotation = Quaternion.Euler(0f, _cameraRotation.rotation.eulerAngles.y + angle, 0f);
+            //Add input to camera angles;
+            currentXAngle += oldVerticalInput * cameraSpeed * Time.deltaTime;
 			currentYAngle += oldHorizontalInput * cameraSpeed * Time.deltaTime;
 
 			//Clamp vertical rotation;
@@ -131,8 +133,6 @@ namespace CMF
 			upwardsDirection = tr.up;
 
 			tr.localRotation = Quaternion.Euler(new Vector3(currentXAngle, currentYAngle, 0));
-			if(isTest)
-            _playerRotation.rotation = Quaternion.Euler(0f, _cameraRotation.rotation.eulerAngles.y, 0f);
         }
 
 		//Set the camera's field-of-view (FOV);
