@@ -3,7 +3,12 @@ guid: 12f67c6f7bb5a164192655efd0d40dea
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DestroyCastle
+    second: {fileID: 2100000, guid: 78e1e2f276ec5d9409e5e69a7534e6bc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

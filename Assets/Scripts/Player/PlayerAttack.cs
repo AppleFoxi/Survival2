@@ -8,12 +8,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private int _damagePlayer;
     [SerializeField] private float _range;
     [SerializeField] private float _attackSpeed = 1.7f;
-    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private LayerMask _enemyMask;
+    [SerializeField] private Camera _fpsCam;
     
     private int _damagePlayerOld;
     private float _attackSpeedOld = 1.7f;
 
-    private Camera fpsCam;
 
     private bool _isAttack;
     private float _timerAttack = 1f;
@@ -22,7 +22,6 @@ public class PlayerAttack : MonoBehaviour
     {
         _attackSpeedOld = _attackSpeed;
         _damagePlayerOld = _damagePlayer;
-        fpsCam = Camera.main;
         StatsManager.OnUpStatsEvent.AddListener(UpDamage);
     }
     private void Update()
@@ -48,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
     {
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward,out hitInfo, _range, enemyMask))
+        if (Physics.Raycast(_fpsCam.transform.position, _fpsCam.transform.forward,out hitInfo, _range, _enemyMask))
         {
             if(hitInfo.collider.GetComponent<EnemyHP>() != null && _timerAttack <= 0)
             {
